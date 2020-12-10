@@ -9,7 +9,7 @@ Citizen.CreateThread(function()
             if DoesEntityExist(vehicle) or not IsPedDeadOrDying(PlayerPedId()) or not IsPedFatallyInjured(PlayerPedId()) then
                 local coords = GetWorldPositionOfEntityBone(vehicle, GetEntityBoneIndexByName(vehicle, 'boot'))
                 SetEntityCollision(PlayerPedId(), false, false)
-                DrawText3D(coords, '~r~[E] ~g~Opustit kufr')
+                DrawText3D(coords, '~r~[E] ~w~Leave trunk')
 
                 if GetVehicleDoorAngleRatio(vehicle, 5) < 0.9 then
                     SetEntityVisible(PlayerPedId(), false, false)
@@ -58,16 +58,16 @@ Citizen.CreateThread(function()
                 if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), coords, true) <= 1.5 then
                     if not inTrunk then
                         if GetVehicleDoorAngleRatio(vehicle, 5) < 0.9 then
-                            DrawText3D(coords, '~r~[E] ~g~Schovat se\n~r~[H] ~g~Otevrit\n~r~[L] ~g~Otevrit uloziste kufru')
+                            DrawText3D(coords, '~r~[E] ~w~Hide\n~r~[H] ~w~Open')
 								if IsControlJustReleased(0, 74)then
 									if lockStatus == 1 then
 										SetCarBootOpen(vehicle)
 									elseif lockStatus == 2 then
-										ESX.ShowNotification('Auto je zamcene')
+										ESX.ShowNotification('Car is locked')
 									end
 								end
                         else
-                            DrawText3D(coords, '~r~[E] ~g~Schovat se\n~r~[H] ~g~Zavrit\n~r~[L] ~g~Otevrit uloziste kufru')
+                            DrawText3D(coords, '~r~[E] ~w~Hide\n~r~[H] ~w~Close')
                             if IsControlJustReleased(0, 74) then
                                 SetVehicleDoorShut(vehicle, 5)
                             end
@@ -91,11 +91,11 @@ Citizen.CreateThread(function()
 									Wait(1500)
 									SetVehicleDoorShut(vehicle, 5)
 								else
-									ESX.ShowNotification('V kufru jiz nekdo je!')
+									ESX.ShowNotification('Someone´s already in the trunk!')
 								end
 							end
 						elseif lockStatus == 2 then
-							ESX.ShowNotification('Auto je zamcene')
+							ESX.ShowNotification('Car is locked')
 						end
                     end
                 end
