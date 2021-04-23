@@ -1,7 +1,6 @@
 # HideInTrunk
 
-#### Czech Version, but in this is it in English
-![Image of HideInTrunk](https://cdn.discordapp.com/attachments/675737636760977428/782588570606370826/unknown.png)
+#### Updated, now it´s with background of text, text is adjacent.
 
 ### Installation
 ```
