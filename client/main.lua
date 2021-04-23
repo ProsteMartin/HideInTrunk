@@ -3,7 +3,7 @@ local inTrunk = false
 ESX = nil
 Citizen.CreateThread(function()
     while true do
-        Wait(0)
+        Wait(7)
         if inTrunk then
             local vehicle = GetEntityAttachedTo(PlayerPedId())
             if DoesEntityExist(vehicle) or not IsPedDeadOrDying(PlayerPedId()) or not IsPedFatallyInjured(PlayerPedId()) then
@@ -58,16 +58,16 @@ Citizen.CreateThread(function()
                 if GetDistanceBetweenCoords(GetEntityCoords(PlayerPedId()), coords, true) <= 1.5 then
                     if not inTrunk then
                         if GetVehicleDoorAngleRatio(vehicle, 5) < 0.9 then
-                            DrawText3D(coords, '~r~[E] ~w~Hide\n~r~[H] ~w~Open')
+                            DrawText3D(coords, '~r~[E] ~w~Hide   ~r~[H] ~w~Open')
 								if IsControlJustReleased(0, 74)then
-									if lockStatus == 1 then
+									if lockStatus == 1 then --unlocked
 										SetCarBootOpen(vehicle)
-									elseif lockStatus == 2 then
-										ESX.ShowNotification('Car is locked')
+									elseif lockStatus == 2 then -- locked
+                                        exports['mythic_notify']:SendAlert('error', 'Car is locked')
 									end
 								end
                         else
-                            DrawText3D(coords, '~r~[E] ~w~Hide\n~r~[H] ~w~Close')
+                            DrawText3D(coords, '~r~[E] ~w~Hide   ~r~[H] ~w~Close')
                             if IsControlJustReleased(0, 74) then
                                 SetVehicleDoorShut(vehicle, 5)
                             end
@@ -77,7 +77,7 @@ Citizen.CreateThread(function()
                         local player = ESX.Game.GetClosestPlayer()
                         local playerPed = GetPlayerPed(player)
 						local playerPed2 = GetPlayerPed(-1)
-						if lockStatus == 1 then
+						if lockStatus == 1 then --unlocked
 							if DoesEntityExist(playerPed) then
 								if not IsEntityAttached(playerPed) or GetDistanceBetweenCoords(GetEntityCoords(playerPed), GetEntityCoords(PlayerPedId()), true) >= 5.0 then
 									SetCarBootOpen(vehicle)
@@ -91,11 +91,11 @@ Citizen.CreateThread(function()
 									Wait(1500)
 									SetVehicleDoorShut(vehicle, 5)
 								else
-									ESX.ShowNotification('Someone´s already in the trunk!')
+                                    exports['mythic_notify']:SendAlert('error', 'Somone is in trunk')
 								end
 							end
 						elseif lockStatus == 2 then
-							ESX.ShowNotification('Car is locked')
+                            exports['mythic_notify']:SendAlert('error', 'Car is locked')
 						end
                     end
                 end
@@ -113,7 +113,7 @@ function DrawText3D(coords, text)
     local onScreen, _x, _y = World3dToScreen2d(coords.x, coords.y, coords.z)
     local pX, pY, pZ = table.unpack(GetGameplayCamCoords())
   
-    SetTextScale(0.4, 0.4)
+    SetTextScale(0.38, 0.38)
     SetTextFont(4)
     SetTextProportional(1)
     SetTextEntry("STRING")
@@ -123,4 +123,6 @@ function DrawText3D(coords, text)
   
     AddTextComponentString(text)
     DrawText(_x, _y)
+    local factor = (string.len(text)) / 370
+    DrawRect(_x,_y+0.0125, 0.0005+ factor, 0.03, 41, 11, 41, 222)
 end
