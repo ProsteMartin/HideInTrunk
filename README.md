@@ -2,7 +2,7 @@
 
 ### Information
 - Updated, now it´s with background of text, text is adjacent.
-- Worked from [this](https://github.com/EGUltraTM/HideInTrunk)
+- Worked from [this](https://github.com/EGUltraTM/HideInTrunk).
 
 ### Installation
 ```
