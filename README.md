@@ -4,6 +4,9 @@
 - Updated, now it´s with background of text, text is adjacent.
 - Worked from [this](https://github.com/EGUltraTM/HideInTrunk).
 
+### Requirements
+- [mythic_notify](https://github.com/ProsteMartin/mythic_notify)
+
 ### Installation
 ```
 # 1. Install HideInTrunk
