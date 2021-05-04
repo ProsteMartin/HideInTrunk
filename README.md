@@ -3,6 +3,7 @@
 ### Information
 - Updated, now it´s with background of text, text is adjacent.
 - Forked from [HideInTrunk](https://github.com/EGUltraTM/HideInTrunk).
+- Compatible with es_extended v1 and v2
 
 ### Requirements
 - [mythic_notify](https://github.com/ProsteMartin/mythic_notify)
